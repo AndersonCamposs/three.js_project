@@ -2,8 +2,8 @@ import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import Stats from 'three/addons/libs/stats.module.js';
 function render() {
-
-    if (needResize()) {
+    /*Função responsável pela renderização da animação*/
+    if (resizeRendererToDisplaySize()) {
         const canvas = renderer.domElement;
         camera.aspect = canvas.width/canvas.height;
         camera.updateProjectionMatrix();
@@ -16,7 +16,8 @@ function render() {
     renderer.render(scene, camera);
 }
 
-function needResize() {
+function resizeRendererToDisplaySize() {
+    /*Função responsável por tornar a página responsiva*/
     const canvas = renderer.domElement;
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
@@ -32,7 +33,7 @@ const objects = [];
 const canvas = document.querySelector('#c');
 const renderer = new THREE.WebGLRenderer({antialias: true, canvas});
 const camera = new THREE.PerspectiveCamera(75, 2, 0.1, 1000);
-camera.position.set(0, 1, 3);
+camera.position.set(0, 1, 3); // distancia a câmera da origem
 const scene = new THREE.Scene();
 const light = new THREE.AmbientLight(0xFFFFFF, 7);
 scene.add(light);
@@ -49,7 +50,5 @@ loader.load(url, (gltf) => {
     objects.push(root);
     scene.add(root);
 }) 
-
-
 
 render();
